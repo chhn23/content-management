@@ -1,0 +1,13 @@
+curl --location --request POST 'http://localhost:8080/single-file-upload' \
+--form 'file=@"/C:/Users/DEEPAK/Downloads/Rishu (1).jpg"'
+
+curl --location --request POST 'http://localhost:8080/uploadMultiple' \
+--form 'files=@"/C:/Users/DEEPAK/Downloads/file-sample_100kB (4).doc"' \
+--form 'files=@"/C:/Users/DEEPAK/Downloads/Rishu (1).jpg"'
+
+
+curl --location --request GET 'http://localhost:8080/availablefiles'
+
+
+
+curl --location --request GET 'http://localhost:8080/downloadToLocal/2895b97a-2c1c-44db-b6d7-d2031e817e1a'
