@@ -1,5 +1,9 @@
 package com.filedownloader.FileDownloader;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.tika.Tika;
@@ -54,6 +58,21 @@ public class Controller {
 
     }
 
+    @Operation(
+            summary = "Uploads the file",
+            description = "uploads a single file",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "File upload done"
+
+                    ),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "Server error"
+                    )
+            }
+    )
     @PostMapping("/single-file-upload")
     public ResponseEntity<Map<String, String>> handleFileUploadUsingCurl(
             @RequestParam("file") MultipartFile file) throws IOException {
@@ -70,6 +89,24 @@ public class Controller {
         return ResponseEntity.ok(map);
     }
 
+    @Operation(
+            summary = "Uploads multiple files",
+            description = "Uploads multiple files edited by dpk",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Successful retrieval",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = FileModel.class)
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "Server error"
+                    )
+            }
+    )
     @PostMapping("/uploadMultiple")
     public ResponseEntity<List<FileModel>> handleMultipleFilesUploadUsingCurl(
             @RequestParam("files") MultipartFile[] files) throws IOException {
