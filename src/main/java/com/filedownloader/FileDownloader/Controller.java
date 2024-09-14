@@ -164,5 +164,22 @@ public class Controller {
         }
     }
 
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity<List<FileModel>> delete(@PathVariable("id") String fid) throws IOException {
+        List<FileModel> foundFileModels=filesDBMock.getFiles(fid);
+        String s=foundFileModels.size()>1 ? "great" : "Not great";
+        if(foundFileModels.size()!=0){
+            FileModel foundFile=foundFileModels.get(0);
+            foundFile.getFilePath();
+            File file= new File(foundFile.getFilePath());
+            FileUtils.delete(file);
+            ResponseEntity<List<FileModel>> re= filesDBMock.deleteFile(fid) ? ResponseEntity.ok().body(foundFileModels)
+                : ResponseEntity.internalServerError().body(foundFileModels);
+            return re;
+        }else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }
 

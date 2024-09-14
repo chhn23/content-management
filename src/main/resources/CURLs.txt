@@ -11,3 +11,5 @@ curl --location --request GET 'http://localhost:8080/availablefiles'
 
 
 curl --location --request GET 'http://localhost:8080/downloadToLocal/2895b97a-2c1c-44db-b6d7-d2031e817e1a'
+
+curl --location --request DELETE 'http://localhost:8080/delete/08584982-207a-4fad-8ef6-46394dc2bbd9'

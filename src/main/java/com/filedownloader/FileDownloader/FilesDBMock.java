@@ -17,4 +17,7 @@ public class FilesDBMock {
     public List<FileModel> getFiles(String fid){
         return availableFiles.stream().filter(f-> f.getId().trim().equals(fid.trim())).collect(Collectors.toList());
     }
+    public boolean deleteFile(String fid){
+        return availableFiles.remove(availableFiles.stream().filter(f-> f.getId().trim().equals(fid.trim())).collect(Collectors.toList()));
+    }
 }
